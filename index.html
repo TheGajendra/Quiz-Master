@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Website</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function startQuiz() {
+            if (!sessionStorage.getItem("loggedIn")) {
+                alert("Please login first!");
+                window.location.href = "login.php";
+            } else {
+                window.location.href = "quiz.html";
+            }
+        }
+
+        function checkLoginStatus() {
+            let loginItem = document.getElementById("auth-button");
+
+            if (sessionStorage.getItem("loggedIn")) {
+                loginItem.innerHTML = '<a href="#" onclick="logout()">Logout</a>';
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem("loggedIn");
+            alert("You have been logged out.");
+            window.location.href = "login.php";
+        }
+
+        window.onload = checkLoginStatus;
+    </script>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="IQArena Logo" style="height: 60px;">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" onclick="startQuiz()">Take Quiz</a></li>
+                <li id="auth-button"><a href="login.php">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <img src="banner.jpg" alt="Quiz Banner" class="banner">
+            <h2>Test Your Knowledge</h2>
+            <button onclick="startQuiz()">Start Quiz</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Quiz Website. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
